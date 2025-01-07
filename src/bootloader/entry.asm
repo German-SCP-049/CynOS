@@ -1,3 +1,4 @@
+[org 0x8400]
 [bits 32]
 
 section .text

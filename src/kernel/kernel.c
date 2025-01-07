@@ -1,15 +1,16 @@
-#include <stdio.h>
 #include <cyn/vga.h>
+#include <cyn/mem.h>
+#include <cyn/lib.h>
 
-void print_info(void);
+void putinfo(void);
 
 void main(void) {
-    init_text_vga();
-    print_info();
-    return;
+    initmem();
+    putinfo();
+    halt();
 }
 
-void print_info() {
+void putinfo() {
     printf("  ____                    \n");
     printf(" / ___|  _    _   _____   \n");
     printf("| |     | |  | | |  _  |  \n");
@@ -17,14 +18,31 @@ void print_info() {
     printf(" \\____|  \\_   /  |_| |_|\n");
     printf("_______  _/ / ____________\n");
     printf("        |_/               \n");
-    move_pos(25, 0);
-    change_color(White, Black);
-    printf("  _____     _____   "); move_pos(25, 1);
-    printf(" / ___ \\   / ____| "); move_pos(25, 2);
-    printf("| |   | | | |____   "); move_pos(25, 3);
-    printf("| |   | |  \\____ \\"); move_pos(25, 4);
-    printf("| |___| |   ____| | "); move_pos(25, 5);
-    printf(" \\_____/   |_____/ "); move_pos(0, 8);
-    change_color(Yellow, Black);
-    printf("screen size : %dx%d\n", TEXT_MODE_WIDTH, TEXT_MODE_HEIGHT);
+    mvpos(25, 0);
+    chgcol(WHITE, BLACK);
+    printf("  _____     _____   "); mvpos(25, 1);
+    printf(" / ___ \\   / ____| "); mvpos(25, 2);
+    printf("| |   | | | |____   "); mvpos(25, 3);
+    printf("| |   | |  \\____ \\"); mvpos(25, 4);
+    printf("| |___| |   ____| | "); mvpos(25, 5);
+    printf(" \\_____/   |_____/ "); mvpos(0, 8);
+    chgcol(YELLOW, BLACK);
+    printf("Screen size : %dx%d\n", TEXT_MODE_WIDTH, TEXT_MODE_HEIGHT);
+    mvpos(23, 8);
+    for (int i = 0; i < 16; i++) {
+        if (i == 8) {
+            mvpos(23, 9);
+        }
+        chgcol(BLACK, i);
+        printf("  ");
+    }
+    chgcol(YELLOW, BLACK);
+    mvpos(0, 9);
+    printf("Memory size : %dMB\n", getmem() / (1024 * 1024));
+    printf("64 bit mode : ");
+    if (chk64bit()) {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
 }

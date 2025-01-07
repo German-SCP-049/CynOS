@@ -1,34 +1,37 @@
-# CynOS v0.1.0
+# CynOS v0.2.0
 
-A simple OS primarily developed by 1 person. (Yes, this has a Murder Drones theme)
+CynOS is a x86/x64 general purpose operating system, written in C and Assembly. The goal is to eventually make it a daily driver intended for small devices (or whatever you wish to be infected with Cyn.) Currently being programmed and maintained exclusively by [SCP-049](https://github.com/German-SCP-049), to use as a learning experience and practice, as well as being a fun side project.
 
-## Lore
-I started this project because after 3 years of doing coding, I haven't got much to show for it other than basic knowledge. Another problem was that for that duration, I've hopped around programming languages without really sticking to one. I have been interested with doing low level programming, so while in my "rust phase" I followed a [guide](https://os.phil-opp.com) but eventually gave up when I got to a point where it became difficult for myself to manage.
-
-I eventually moved onto C, experimenting with it, but like everything before, nothing to show but basic knowledge. So I decided to actually try and make something. [Daedalus Community](https://www.youtube.com/@DaedalusCommunity) got me into the beginning, by teaching how to make a simple bootloader. From there I used my previous knowledge from doing a OS in rust to make a VGA driver, and now here we are.
-
-Ideally, the goal would be to have an OS with a GUI, a good portion of libc, and a custom shell that can execute binarys. From there I would like to create some apps, a C compilier, and maybe some games. Although it will definently take a while, it will certainly be a fun (and frustrating) journey.
-
-So all and all, the main point I'm trying to make is that this OS is mainly a way for me to learn not how to *code*, since I already know how, but rather how to *program*. Feel free to use this OS or it's code however you wish, go make something cool.
+Check out `changelog.md` for new features / history!
 
 ## Features
-- Bootloader with LBA and CHS disk reading
+- 32/64 bit support
+- Bootloader
 - VGA text mode driver
-- A basic printf implementation
-- GDB debugging in vscode
+- Paging
 
 ## Building/running
-The compiler I use can be installed from this [install script](https://github.com/mell-o-tron/MellOs/tree/main/A_Setup). Then you can just `make` and run it.<br>
-If you don't want to compile and only wish to run it, `make run_drive` or `make run_floppy` will just run `./bin/os.bin` in qemu if its installed.
+In order to build and run CynOS, you'll need 2 main things<br>
+- [x86_64-elf-gcc](https://formulae.brew.sh/formula/x86_64-elf-gcc)
+- QEMU<br>
+
+To compile and run, all you have to do is type `make` in the terminal. If however you want to compile the 32 bit version, go into the `Makefile` on line 13 and change x86_64 from true to false. (Make sure to `make clean` before you recompile for 32 bits!)
+```makefile
+# set to false to compile and run 32 bit code
+x86_64 := true
+```
+
+If you want to just run the binaries in QEMU, enter `qemu-system-x86_64 -drive format=raw,file=./bin/CynOS64.bin` or `qemu-system-i386 -drive format=raw,file=./bin/CynOS32.bin` to try out the 64 and 32 bit binaries respectively.
 
 ## Next update to-do:
-- Get available memory
-- Make OS work on real hardware
-- Make 64 bit boot option
-- Generally just improve the bootloader
+- Interrupt handling
+- Keyboard driver
+- Heap allocation
 
-## Insperations
+## Inspirations
 These are some of the resources I used to learn how to do OS development:<br>
 [MellOS](https://github.com/mell-o-tron/MellOs/tree/main)<br>
 [Making an OS](https://www.youtube.com/watch?v=MwPjvJ9ulSc&list=PLm3B56ql_akNcvH8vvJRYOc7TbYhRs19M) Made by the same guy that made MellOS, really good for getting started.<br>
-[OSDev Wiki](https://wiki.osdev.org/Expanded_Main_Page)
+[OSDev Wiki](https://wiki.osdev.org/Expanded_Main_Page)<br>
+[The Holy Intel Manual](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)<br>
+The good people in the osdev discord

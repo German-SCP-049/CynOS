@@ -1,5 +1,5 @@
 /* 
- * Custom stdio.h that you know from normal C
+ * CynOS <stdio.h>
  */
 
 #ifndef STDIO_H

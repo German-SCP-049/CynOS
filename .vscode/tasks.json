@@ -5,7 +5,7 @@
             "label": "Launch QEMU",
             "type": "shell",
             "linux": {
-                "command": "qemu-system-x86_64 -s -S -drive format=raw,file=./bin/os.bin -daemonize"
+                "command": "qemu-system-x86_64 -s -S -drive format=raw,file=./bin/CynOS.bin -daemonize"
             }
         }
     ]

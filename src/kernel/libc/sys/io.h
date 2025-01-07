@@ -1,5 +1,5 @@
 /* 
- * Custom sys/io.h that you know from normal C
+ * CynOS <sys/io.h>
  */
 
 #ifndef IO_H

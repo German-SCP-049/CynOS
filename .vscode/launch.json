@@ -5,7 +5,7 @@
             "name": "AbsoluteDebugger",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/bin/full_kernel.elf",
+            "program": "${workspaceRoot}/bin/kernel/cyn_kernel.elf",
             "cwd": "${workspaceRoot}",
             "args": [],
             "targetArchitecture": "x86",
@@ -28,7 +28,7 @@
                     "ignoreFailures": true
                 },
                 {
-                    "text": "file ${workspaceRoot}/bin/full_kernel.elf",
+                    "text": "file ${workspaceRoot}/bin/kernel/cyn_kernel.elf",
                     "description": "Load binary."
                 },
                 {
